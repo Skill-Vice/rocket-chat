@@ -1,6 +1,6 @@
-import { useRouteParameter, useRouter, useRole, useSetting } from '@rocket.chat/ui-contexts';
+import { useRole, useRouteParameter, useRouter, useSetting } from '@rocket.chat/ui-contexts';
 import type { Dispatch, SetStateAction } from 'react';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export const useStepRouting = (): [number, Dispatch<SetStateAction<number>>] => {
 	const param = useRouteParameter('step');
@@ -39,17 +39,20 @@ export const useStepRouting = (): [number, Dispatch<SetStateAction<number>>] => 
 		switch (true) {
 			case (currentStep === 1 || currentStep === 2) && hasOrganizationData: {
 				setCurrentStep(3);
+				console.log("*** Debug 2")
 				router.navigate(`/setup-wizard/3`);
 				break;
 			}
 
 			case currentStep === 1 && hasAdminRole: {
 				setCurrentStep(2);
+				console.log("*** Debug 3")
 				router.navigate(`/setup-wizard/2`);
 				break;
 			}
 
 			default: {
+				console.log("*** Debug 4")
 				router.navigate(`/setup-wizard/${currentStep}`);
 			}
 		}
